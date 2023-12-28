@@ -36,7 +36,7 @@ public class SeleniumTest {
         CheckoutCompletePage checkoutCompletePage = new CheckoutCompletePage(driver);
 
         // Login page
-        driver.navigate().to("https://www.saucedemo.com/");
+        navigateTo("https://www.saucedemo.com/", driver);
         Assert.assertEquals(driver.findElement(By.id("user-name")).getAttribute ("placeholder"), "Username");
         Assert.assertEquals(driver.findElement(By.id("password")).getAttribute ("placeholder"), "Password");
         loginPage.setTextInUsernameBox("standard_user");
@@ -44,32 +44,32 @@ public class SeleniumTest {
         loginPage.clickLoginButton();
 
         // Inventory page
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+        assertCurrentUrl("https://www.saucedemo.com/inventory.html", driver);
         inventoryPage.clickOnesieClothingButton();
         inventoryPage.clickFleeceJacketClothingButton();
         inventoryPage.clickShoppingCartButton();
 
         // Cart page
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/cart.html");
+        assertCurrentUrl("https://www.saucedemo.com/cart.html", driver);
         cartPage.clickCheckoutButton();
 
         // Checkout step one page
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/checkout-step-one.html");
+        assertCurrentUrl("https://www.saucedemo.com/checkout-step-one.html", driver);
         checkoutStepOnePage.setTextInFirstNameBox("JorgeTest");
         checkoutStepOnePage.setTextInLastNameBox("TestingGod");
         checkoutStepOnePage.setTextInPostalCodeBox("0000");
         checkoutStepOnePage.clickContinueButton();
 
         //Checkout step two page
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/checkout-step-two.html");
+        assertCurrentUrl("https://www.saucedemo.com/checkout-step-two.html", driver);
         checkoutStepTwoPage.clickFinishButton();
 
         // Checkout complete
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/checkout-complete.html");
+        assertCurrentUrl("https://www.saucedemo.com/checkout-complete.html", driver);
         checkoutCompletePage.clickBackToProductsButton();
 
         // Products page (again)
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+        assertCurrentUrl("https://www.saucedemo.com/inventory.html", driver);
         inventoryPage.clickReactBurgerMenuButton();
 
         wait.until(ExpectedConditions.elementToBeClickable(By.id("logout_sidebar_link")));
@@ -79,4 +79,18 @@ public class SeleniumTest {
         // Login page (again)
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
     }
+
+    private void navigateTo(String url, WebDriver driver) {
+        driver.navigate().to(url);
+    }
+
+    private void assertCurrentUrl(String expectedUrl, WebDriver driver) {
+        Assert.assertEquals(driver.getCurrentUrl(), expectedUrl);
+    }
+
+    private void assertElementAttribute(By by, String attributeName, String expectedValue, WebDriver driver) {
+        String actualValue = driver.findElement(by).getAttribute(attributeName);
+        Assert.assertEquals(actualValue, expectedValue);
+    }
+
 }

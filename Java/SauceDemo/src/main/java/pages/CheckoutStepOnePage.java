@@ -3,9 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class CheckoutStepOnePage {
-
-    WebDriver driver;
+public class CheckoutStepOnePage extends Sidebar{
 
     By first_name_box = By.id("first-name");
     By last_name_box = By.id("last-name");
@@ -14,7 +12,7 @@ public class CheckoutStepOnePage {
 
 
     public CheckoutStepOnePage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void setTextInFirstNameBox(String text) {
