@@ -21,7 +21,7 @@ class TestLogIn(unittest.TestCase):
     This class contains the test cases for the login functionality of the SauceDemo application
     """
 
-    driver = BrowserSetup().initialize_browser("chrome")
+    driver = BrowserSetup().initialize_browser("firefox")
 
     def test_end_to_end(self):
 
