@@ -35,11 +35,11 @@ class TestLogIn(unittest.TestCase):
 
         # Login Page
         self.driver.get("https://www.saucedemo.com/")
-        username_placeholder = self.driver.find_element(By.ID, "user-name").get_attribute("placeholder")
-        password_placeholder = self.driver.find_element(By.ID, "password").get_attribute("placeholder")
+        username_field = self.driver.find_element(By.ID, "user-name").get_attribute("placeholder")
+        password_field = self.driver.find_element(By.ID, "password").get_attribute("placeholder")
 
-        self.assertEqual(username_placeholder, "Username", "Placeholder for username incorrect.")
-        self.assertEqual(password_placeholder, "Password", "Placeholder for password incorrect.")
+        self.assertEqual(username_field, "Username", "Placeholder for username incorrect.")
+        self.assertEqual(password_field, "Password", "Placeholder for password incorrect.")
         self.assertEqual(self.driver.current_url, "https://www.saucedemo.com/")
 
         login_page.set_text_in_username_box("standard_user")
@@ -57,18 +57,18 @@ class TestLogIn(unittest.TestCase):
         cart_page.click_checkout_button()
 
         # Checkout Step One Page
-        self.assertEqual(self.driver.current_url, "https://www.saucedemo.com/checkout-step-one.html")
+        self.assertEqual(self.driver.current_url,"https://www.saucedemo.com/checkout-step-one.html")
         checkout_step_one_page.set_text_in_first_name_box("John")
         checkout_step_one_page.set_text_in_last_name_box("Doe")
         checkout_step_one_page.set_text_in_postal_code_box("12345")
         checkout_step_one_page.click_continue_button()
 
         # Checkout Step Two Page
-        self.assertEqual(self.driver.current_url, "https://www.saucedemo.com/checkout-step-two.html")
+        self.assertEqual(self.driver.current_url,"https://www.saucedemo.com/checkout-step-two.html")
         checkout_step_two_page.click_finish_button()
 
         # Checkout Complete Page
-        self.assertEqual(self.driver.current_url, "https://www.saucedemo.com/checkout-complete.html")
+        self.assertEqual(self.driver.current_url,"https://www.saucedemo.com/checkout-complete.html")
         check_out_complete_page.click_back_to_products_button()
 
         # Inventory Page (again)
