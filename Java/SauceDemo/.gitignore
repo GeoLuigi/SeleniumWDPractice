@@ -35,4 +35,4 @@ build/
 .vscode/
 
 ### Allure reporter ###
-.allure-results/
+/allure-results/
